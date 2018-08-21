@@ -1,0 +1,46 @@
+{
+  "name": "learning-git-2",
+  "version": "1.0.0",
+  "description": "https://gsgregorion.github.io/learning-git-2/",
+  "main": "index.js",
+  "scripts": {
+    "test": "run-s test:*",
+    "test:html": "globstar nu-html-checker *.html",
+    "init-project": "npm install && run-s init:*",
+    "init:dirs": "mkdirp sass css vendor images js",
+    "init:files": "touch README.md index.html sass/style.scss js/script.js",
+    "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "build": "run-s build:* test",
+    "build:clean": "rimraf css/*",
+    "build:sass": "node-sass --output-style compact -o css sass",
+    "build:autoprefixer": "autoprefixer-cli css/style.css -o css/style.css",
+    "build-dev:sass": "node-sass --output-style expanded --source-map true -o css sass",
+    "watch": "run-s build && run-p watch:*",
+    "watch:sassprefixer": "onchange sass/style.scss -- npm-run-all -p watcher:*",
+    "watch:browsersync": "browser-sync start --server --files='*.html, css/*.css'",
+    "watcher:sass": "node-sass --output-style expanded --source-map true -o css sass",
+    "watcher:autoprefixer": "autoprefixer-cli css/style.css -o css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GsGregorion/learning-git-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GsGregorion/learning-git-2/issues"
+  },
+  "homepage": "https://github.com/GsGregorion/learning-git-2#readme",
+  "devDependencies": {
+    "autoprefixer-cli": "^1.0.0",
+    "browser-sync": "^2.24.6",
+    "globstar": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.9.3",
+    "npm-run-all": "^4.1.3",
+    "onchange": "^4.1.0",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {}
+}
