@@ -1,25 +1,69 @@
 'use strict';
 (function(){
-	
-	// Mimo, że obecnie mamy tylko jeden link, stosujemy kod dla wielu linków. W ten sposób nie będzie trzeba go zmieniać, kiedy zechcemy mieć więcej linków lub guzików otwierających modale
-	
+	//przypisuje funkcje playerMoveAction do odpowiednich buttonów: papier, nożyce, kamień
 	var buttonsFinder = document.querySelectorAll('.player-move');
 	
 	for(var i = 0; i < buttonsFinder.length; i++){
 		buttonsFinder[i].addEventListener('click', function(event){
-  playerMoveAction(this.getAttribute('data-move'));
+      playerMoveAction(this.getAttribute('data-move'));
     });
   }
+  
+//show and hide Modal
+var handleShowModal = function(event){
+  event.preventDefault();
+  var modalToOpen = (this.getAttribute('href')); //gpsE - getting href value from link
+    document.querySelector('#modal-overlay').classList.add('show');
+    document.querySelector(modalToOpen).classList.add('show'); //gpsE - query serach to add show class
+};
+
+var handleHideModal = function(event){
+  event.preventDefault();
+ 
+    for (var i = 0 ; i < modals.length ; i++) {
+      modals[i].classList.remove('show'); //close all modals on overlay layer
+    }
+  document.querySelector('#modal-overlay').classList.remove('show'); // overlay close
+};
+
+// modalLinks finder
+var modalLinks = document.querySelectorAll('.show-modal');
+
+for(var i = 0; i < modalLinks.length; i++){
+  modalLinks[i].addEventListener('click', handleShowModal);  
+}
+
+//close function binding to close button
+var modals = document.querySelectorAll('.modal'); // gpse - variable to use in for loop to find all modals
+
+for(var i = 0; i < modals.length; i++){
+  modals[i].addEventListener('click', function(event){
+    event.stopPropagation();
+  });
+}
+
+var closeButtons = document.querySelectorAll('.modal .close');
+
+for(var i = 0; i < closeButtons.length; i++){
+  closeButtons[i].addEventListener('click', handleHideModal);
+}
+
+// closing through the overlay clicking
+document.querySelector('#modal-overlay').addEventListener('click', handleHideModal);
 
 //game
-
-
 //global variables
-var params = {winsNumber: 0, roundNumber: 0, playerScore: 0, computerScore: 0, canPlay: false};
+var params = {
+  winsNumber: 0, 
+  roundNumber: 0, 
+  playerScore: 0, 
+  computerScore: 0, 
+  canPlay: false
+};
 
 newGame.addEventListener('click', function(event){
   var newWinNumber = window.prompt('Chcesz zagrać kolejny raz? Do ilu gramy?!');
-  if (!newWinNumber) {
+  if (!newWinNumber || isNaN(newWinNumber)) {
     return false;
   }
   params.winsNumber = newWinNumber;
@@ -31,6 +75,12 @@ newGame.addEventListener('click', function(event){
 });
 
 //functions
+var displayFinalGameResult = function(textToDisplay, roundResult){
+  document.getElementById('finalResult').innerHTML = textToDisplay + '<br>' + roundResult;
+  document.querySelector('#modal-overlay').classList.add('show');
+  document.querySelector('#modal-final-result').classList.add('show');
+}
+
 var displayGameResult = function(textToDisplay, roundResult){
   document.getElementById('gameResult').innerHTML = textToDisplay;
   document.getElementById('result').innerHTML = roundResult;
@@ -55,27 +105,27 @@ var playerMoveAction = function(playerMove){
       message2;
   //poniżej należy wstawić sprawdzanie kto wygrał
     if (playerMove == computerMove){
-      message = ('Remis! Wybrałeś ' + playerMove + '! Twój przeciwnik zagrał ' + computerMove + '! <br>');
+      message = 'Remis! Wybrałeś ' + playerMove + '! Twój przeciwnik zagrał ' + computerMove + '! <br>';
     } else if ((playerMove == 'paper' && computerMove == 'stone') || (playerMove == 'scissors' && computerMove == 'paper') || (playerMove == 'stone' && computerMove == 'scissors')){
-      message = ('Wygrałeś! <br> Wybrałeś ' + playerMove + '! Twój przeciwnik zagrał ' + computerMove + '! <br>');
+      message = 'Wygrałeś! <br> Wybrałeś ' + playerMove + '! Twój przeciwnik zagrał ' + computerMove + '! <br>';
       params.playerScore++;
     } else {
-      message = ('Przegrałeś! <br> Wybrałeś ' + playerMove + '! Twój przeciwnik zagrał ' + computerMove + '! <br>');
+      message = 'Przegrałeś! <br> Wybrałeś ' + playerMove + '! Twój przeciwnik zagrał ' + computerMove + '! <br>';
       params.computerScore++;
     };
   
     if (params.playerScore == params.winsNumber){
-      message2 = ('GAME OVER! YOU WON! Punkty które zdobyłeś:<br>' + params.playerScore);
+      message2 = 'GAME OVER! YOU WON! Punkty które zdobyłeś:<br>' + params.playerScore;
       params.canPlay = false;
-      displayGameResult('', message2);
+      displayFinalGameResult('', message2);
     } else if (params.computerScore == params.winsNumber){
-      message2 = ('GAME OVER! Twój przeciwnik zwyciężył! Punkty które zdobył:<br> ' + params.computerScore);
+      message2 = 'GAME OVER! Twój przeciwnik zwyciężył! Punkty które zdobył:<br> ' + params.computerScore;
       params.canPlay = false;
-      displayGameResult('', message2);
+      displayFinalGameResult('', message2);
     } else {
-      message2 = ('<strong>Round</strong> no ' + params.roundNumber + '<br>' + '<strong>Player1 result <br></strong>' + params.playerScore + '<br>' + '<strong>Player2 result</strong> <br>' + params.computerScore + '<br> Gramy do ' + params.winsNumber);
+      message2 = '<strong>Round</strong> no ' + params.roundNumber + '<br>' + '<strong>Player1 result <br></strong>' + params.playerScore + '<br>' + '<strong>Player2 result</strong> <br>' + params.computerScore + '<br> Gramy do ' + params.winsNumber;
       displayGameResult(message, message2);
     }
 };
-
-})();
+  
+})(); 
