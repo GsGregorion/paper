@@ -10,11 +10,9 @@
   playerMoveAction(this.getAttribute('data-move'));
     });
   }
-})(); 
 
-'use strict'
-
-//global variables
+  //game
+  //global variables
 var params = {winsNumber: 0, roundNumber: 0, playerScore: 0, computerScore: 0, canPlay: false};
 
 newGame.addEventListener('click', function(event){
@@ -77,3 +75,4 @@ var playerMoveAction = function(playerMove){
       displayGameResult(message, message2);
     }
 };
+})(); 

@@ -8,33 +8,36 @@
 </head>
 
 <body>
-
   <div>
-  	<button id="buttonPaper" data-move="paper" class="player-move">Papier</button>
+    <button id="buttonPaper" data-move="paper" class="player-move">Papier</button>
   </div>
-
-  <div id="paperMessage"></div>
-
-  <div>
-  	<button id="buttonScissors" data-move="scissors" class="player-move">Nożyce</button>
-  </div>
-
-  <div id="scissorsMessage"></div>
-
-  <div>
-  	<button id="buttonStone" data-move="stone" class="player-move">Kamień</button>
-  </div>
-
-  <div id="stoneMessage"></div>
-
-  <div id="result"></div>
-
-  <div>
-  	<button id="newGame">New Game</button>
-  </div>
-
-  <div id="gameResult"></div>
   
+  <div>
+    <button id="buttonScissors" data-move="scissors" class="player-move">Nożyce</button>
+  </div>
+  
+  <div>
+    <button id="buttonStone" data-move="stone" class="player-move">Kamień</button>
+  </div>
+  
+  <div id="result"></div>
+  
+  <div>
+    <button id="newGame">New Game</button>
+  </div>
+  
+  <div id="gameResult"></div>  
+  
+  <div class="overlay" id="modal-overlay">
+    <div class="modal" id="modal-final-result">
+      <a href="#" class="close">x</a>
+      <header>Game Result</header>
+      <div class="content" id="finalResult">
+        <p>Dolor sit amet!</p>
+      </div>
+    </div>
+  </div>
+
   <script  src="js/index.js"></script>
 
 </body>
