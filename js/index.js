@@ -23,7 +23,7 @@ var handleHideModal = function(event){
     for (var i = 0 ; i < modals.length ; i++) {
       modals[i].classList.remove('show'); //close all modals on overlay layer
     }
-  document.querySelector('#modal-overlay').classList.remove('show'); // overlay close
+    document.querySelector('#modal-overlay').classList.remove('show'); // overlay close
 };
 
 // modalLinks finder
@@ -42,10 +42,23 @@ for(var i = 0; i < modals.length; i++){
   });
 }
 
+//close to open modal
 var closeButtons = document.querySelectorAll('.modal .close');
 
 for(var i = 0; i < closeButtons.length; i++){
   closeButtons[i].addEventListener('click', handleHideModal);
+}
+
+//close modal
+var displayFinalResultTable = function(textToDisplay, roundResult){
+  document.querySelector("#modal-final-result").classList.remove('show')
+  document.querySelector('#modal-table').classList.add('show');
+}
+
+var closeOpenButtons = document.querySelectorAll('.modal .close_open');
+
+  for(var i = 0; i < closeOpenButtons.length; i++){
+    closeOpenButtons[i].addEventListener('click', displayFinalResultTable);
 }
 
 // closing through the overlay clicking
@@ -58,12 +71,16 @@ var params = {
   roundNumber: 0, 
   playerScore: 0, 
   computerScore: 0, 
-  canPlay: false
+  canPlay: false,
 };
 
+for(var i = 0; i < buttonsFinder.length; i++){
+		buttonsFinder[i].disabled = true;
+};
+  
 newGame.addEventListener('click', function(event){
   var newWinNumber = window.prompt('Chcesz zagrać kolejny raz? Do ilu gramy?!');
-  if (!newWinNumber || isNaN(newWinNumber)) {
+  if ((!newWinNumber) || isNaN(newWinNumber)) {
     return false;
   }
   params.winsNumber = newWinNumber;
@@ -72,13 +89,19 @@ newGame.addEventListener('click', function(event){
   params.playerScore = 0;
   params.computerScore = 0;
   displayGameResult('','');
+  for(var i = 0; i < buttonsFinder.length; i++){
+		buttonsFinder[i].disabled = false
+  };
 });
 
 //functions
+
+  
 var displayFinalGameResult = function(textToDisplay, roundResult){
   document.getElementById('finalResult').innerHTML = textToDisplay + '<br>' + roundResult;
   document.querySelector('#modal-overlay').classList.add('show');
   document.querySelector('#modal-final-result').classList.add('show');
+  //document.querySelector('#modal-table').classList.add('show');
 }
 
 var displayGameResult = function(textToDisplay, roundResult){
@@ -97,13 +120,14 @@ var getComputerMove = function(){
 var playerMoveAction = function(playerMove){
   if (!params.canPlay){
     alert('Chcesz zagrać? Kliknij New Game i postępuj zgodnie z komunikatem!');
+
     return false;
   }
   params.roundNumber++;
   var computerMove = getComputerMove(),
       message,
       message2;
-  //poniżej należy wstawić sprawdzanie kto wygrał
+  //who won
     if (playerMove == computerMove){
       message = 'Remis! Wybrałeś ' + playerMove + '! Twój przeciwnik zagrał ' + computerMove + '! <br>';
     } else if ((playerMove == 'paper' && computerMove == 'stone') || (playerMove == 'scissors' && computerMove == 'paper') || (playerMove == 'stone' && computerMove == 'scissors')){
@@ -128,4 +152,4 @@ var playerMoveAction = function(playerMove){
     }
 };
   
-})(); 
+})();
