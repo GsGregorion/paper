@@ -12,7 +12,7 @@ button:hover, button:active { color: #02ac46; background-color: #fff; }
 
 .modal.show { display: block; }
 
-.modal .close { position: absolute; right: 0; top: 0; padding: 9px; color: #000; text-decoration: none; }
+.modal .close, .modal .close-open { position: absolute; right: 0; top: 0; padding: 9px; color: #000; text-decoration: none; }
 
 .modal header { font-size: 20px; line-height: 30px; min-height: 30px; font-weight: bold; padding: 0 30px; }
 
