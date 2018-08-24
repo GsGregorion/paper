@@ -42,20 +42,21 @@ for(var i = 0; i < modals.length; i++){
   });
 }
 
-//close to open modal
+//close modal
 var closeButtons = document.querySelectorAll('.modal .close');
 
 for(var i = 0; i < closeButtons.length; i++){
   closeButtons[i].addEventListener('click', handleHideModal);
 }
 
-//close modal
+//close
 var displayFinalResultTable = function(textToDisplay, roundResult){
   document.querySelector("#modal-final-result").classList.remove('show')
   document.querySelector('#modal-table').classList.add('show');
 }
 
-var closeOpenButtons = document.querySelectorAll('.modal .close_open');
+//close open modal
+var closeOpenButtons = document.querySelectorAll('.modal .close-open');
 
   for(var i = 0; i < closeOpenButtons.length; i++){
     closeOpenButtons[i].addEventListener('click', displayFinalResultTable);
