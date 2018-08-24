@@ -23,7 +23,7 @@ var handleHideModal = function(event){
     for (var i = 0 ; i < modals.length ; i++) {
       modals[i].classList.remove('show'); //close all modals on overlay layer
     }
-    document.querySelector('#modal-overlay').classList.remove('show'); // overlay close
+      document.querySelector('#modal-overlay').classList.remove('show'); // overlay close
 };
 
 // modalLinks finder
@@ -49,7 +49,6 @@ for(var i = 0; i < closeButtons.length; i++){
   closeButtons[i].addEventListener('click', handleHideModal);
 }
 
-//close
 var displayFinalResultTable = function(textToDisplay, roundResult){
   document.querySelector("#modal-final-result").classList.remove('show')
   document.querySelector('#modal-table').classList.add('show');
@@ -128,7 +127,7 @@ var playerMoveAction = function(playerMove){
   var computerMove = getComputerMove(),
       message,
       message2;
-  //who won
+  //poniżej należy wstawić sprawdzanie kto wygrał
     if (playerMove == computerMove){
       message = 'Remis! Wybrałeś ' + playerMove + '! Twój przeciwnik zagrał ' + computerMove + '! <br>';
     } else if ((playerMove == 'paper' && computerMove == 'stone') || (playerMove == 'scissors' && computerMove == 'paper') || (playerMove == 'stone' && computerMove == 'scissors')){
@@ -153,4 +152,4 @@ var playerMoveAction = function(playerMove){
     }
 };
   
-})();
+})(); 
