@@ -158,30 +158,31 @@
   }
   semiResult = params.playerScore + ' - ' + params.computerScore;
   params.progress.push(params.roundNumber, playerMove, computerMove, whoWin, semiResult);
-    //display result
+    //display result  
+  //var tableResult = document.getElementById('tableResult').innerHTML = (params.progress);
+  
+  function addTable() {
+    var myTableResult = document.getElementById('tableResult');
+      myTableResult.innerHTML = ('');
+    //var table = document.createElement('TABLE');
     
-  var tableResult = document.getElementById('tableResult').innerHTML = (params.progress);
-  };
-  /*function addTable() {
-    var myResultTable = document.getElementById("tableResult");
 
-    var table = document.createElement('TABLE');
+    //var tableBody = document.createElement('TBODY');
+    //table.appendChild(tableBody);
 
-    var tableBody = document.createElement('TBODY');
-    table.appendChild(tableBody);
-
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < params.roundNumber; i++) {
         var tr = document.createElement('TR');
-        tableBody.appendChild(tr);
+        myTableResult.appendChild(tr);
 
-        for (var j = 0; j < 4; j++) {
+        for (var j = 0; j < 5; j++) {
             var td = document.createElement('TD');
             td.width = '75';
-            td.appendChild(document.createTextNode("Cell " + i + "," + j));
+            td.appendChild(document.createTextNode(params.progress[5 * i + j]));
             tr.appendChild(td);
         }
     }
-    myResultTable.appendChild(table);
+    myTableResult.appendChild(table);
   }
-  addTable();*/
+  addTable();
+  };
 })(); 
