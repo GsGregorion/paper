@@ -9,17 +9,17 @@
 
 <body>
   <div>
-    <button id="buttonPaper" data-move="paper" class="player-move">Papier</button>
+    <button id="buttonPaper" data-move="paper" class="player-move player-move-disabled">Papier</button>
  
-    <button id="buttonScissors" data-move="scissors" class="player-move">Nożyce</button>
+    <button id="buttonScissors" data-move="scissors" class="player-move player-move-disabled">Nożyce</button>
 
-    <button id="buttonStone" data-move="stone" class="player-move">Kamień</button>
+    <button id="buttonStone" data-move="stone" class="player-move player-move-disabled">Kamień</button>
   </div>
 
   <div id="result"></div>
   
   <div>
-    <button id="newGame">New Game</button>
+    <button id="newGame" class="new-game">New Game</button>
   </div>
   
   <div id="gameResult"></div>
@@ -36,7 +36,7 @@
     <div class="modal" id="modal-table">
       <a href="#" class="close">x</a>
       <header>Final Result</header>
-      <div class="content" id="tableResult">
+      <div class="content">
         <table>
           <thead>
             <tr>
@@ -47,7 +47,7 @@
               <td>Result</td>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="tableResult">
               
             </tbody>
         </table>

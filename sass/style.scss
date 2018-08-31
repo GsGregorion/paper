@@ -14,7 +14,7 @@ button {
   white-space: nowrap;
   vertical-align: middle;
 	color: #fff;
-  background-color: $active_button_color;
+	background-color: $active_button_color;
 	border: 2px solid $active_button_color;
   border-radius: 4px;
 	transition: color .3s, background-color .3s;
@@ -30,6 +30,10 @@ button {
 	  color: $active_button_color;
 	  background-color: #fff;
 	}
+}
+
+.player-move-disabled {
+	opacity: 0.6;
 }
 
 .overlay {
@@ -68,10 +72,10 @@ button {
 		color: #000;
 		text-decoration: none;
 	}
-  
-  .close-open {
-    @extend .close;
-  }
+
+	.close-open {
+		@extend .close;
+	}
 	
 	header {
 		font-size: 20px;
@@ -84,5 +88,17 @@ button {
 	.content {
 		min-height: 30px;
 		padding: 5px 30px;
+	}
+}
+
+table {
+	border: solid 1px grey;
+	
+	thead {
+	font-weight: bold;
+	}
+
+	td {
+	border: solid 0.5px black;
 	}
 }
