@@ -179,14 +179,14 @@
     message2 = 'GAME OVER! YOU WON! Punkty które zdobyłeś:<br>' + params.playerScore;
     params.canPlay = false;
     disableButtons();
-    displayGameResult('', message2);
+    displayGameResult(message, message2);
     displayFinalGameResult('', message2);
   } else if (params.computerScore == params.winsNumber) {
     params.computerScore++;
     message2 = 'GAME OVER! Twój przeciwnik zwyciężył! Punkty które zdobył:<br> ' + params.computerScore;
     params.canPlay = false;
     disableButtons();
-    displayGameResult('', message2);
+    displayGameResult(message, message2);
     displayFinalGameResult('', message2);
   } else {
     message2 = '<strong>Round</strong> no ' + params.roundNumber + '<br>' + '<strong>Player1 result <br></strong>' + params.playerScore + '<br>' + '<strong>Player2 result</strong> <br>' + params.computerScore + '<br> Gramy do ' + params.winsNumber;
