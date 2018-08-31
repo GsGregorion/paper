@@ -49,7 +49,7 @@
       closeButtons[i].addEventListener('click', handleHideModal);
     }
 
-  var displayFinalResultTable = function(textToDisplay, roundResult) {
+  var displayFinalResultTable = function() {
     document.querySelector("#modal-final-result").classList.remove('show');
     tableResult = document.querySelector('#modal-table').classList.add('show');
   }
@@ -79,7 +79,8 @@
   for (var i = 0; i < buttonsFinder.length; i++) {
 		buttonsFinder[i].disabled = true;
   };
-  
+
+  //functions
   newGame.addEventListener('click', function(event) {
     var newWinNumber = window.prompt('Chcesz zagrać kolejny raz? Do ilu gramy?!');
     if (!newWinNumber || isNaN(newWinNumber)) {
@@ -100,7 +101,6 @@
     }
   });
 
-  //functions
   var displayFinalGameResult = function(textToDisplay, roundResult) {
     document.getElementById('finalResult').innerHTML = textToDisplay + '<br>' + roundResult;
     document.querySelector('#modal-overlay').classList.add('show');
@@ -109,8 +109,8 @@
   }
 
   var displayGameResult = function(textToDisplay, roundResult) {
-    document.getElementById('gameResult').innerHTML = textToDisplay;
-    document.getElementById('result').innerHTML = roundResult;
+    document.getElementById('gameSummary').innerHTML = textToDisplay;
+    document.getElementById('gameResult').innerHTML = roundResult;
   }
 
   var getComputerMove = function() {
@@ -173,14 +173,18 @@
   };
   
   if (params.playerScore == params.winsNumber) {
+    params.playerScore++;
     message2 = 'GAME OVER! YOU WON! Punkty które zdobyłeś:<br>' + params.playerScore;
     params.canPlay = false;
     disableButtons();
+    displayGameResult('', message2);
     displayFinalGameResult('', message2);
   } else if (params.computerScore == params.winsNumber) {
-    message2 = 'GAME OVER! Twój przeciwnik zwyciężył! Punkty które zdobył:<br> ' + params.computerScore;
+    params.computerScore++;
+    message2 = 'GAME OVER! Twój przeciwnik zwyciężył! Punkty które zdobył:<br> ' + params.computerScore;
     params.canPlay = false;
     disableButtons();
+    displayGameResult('', message2);
     displayFinalGameResult('', message2);
   } else {
     message2 = '<strong>Round</strong> no ' + params.roundNumber + '<br>' + '<strong>Player1 result <br></strong>' + params.playerScore + '<br>' + '<strong>Player2 result</strong> <br>' + params.computerScore + '<br> Gramy do ' + params.winsNumber;
