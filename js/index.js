@@ -50,6 +50,11 @@
     }
 
 //close to open modal
+  var displayFinalResultTable = function() {
+    document.querySelector("#modal-final-result").classList.remove('show');
+    tableResult = document.querySelector('#modal-table').classList.add('show');
+  }
+  
   var closeOpenButtons = document.querySelectorAll('.modal .close-open');
 
     for (var i = 0; i < closeOpenButtons.length; i++) {
@@ -104,11 +109,6 @@
     document.getElementById('finalResult').innerHTML = textToDisplay + '<br>' + roundResult;
     document.querySelector('#modal-overlay').classList.add('show');
     document.querySelector('#modal-final-result').classList.add('show');
-  }
- 
-  var displayFinalResultTable = function() {
-    document.querySelector("#modal-final-result").classList.remove('show');
-    tableResult = document.querySelector('#modal-table').classList.add('show');
   }
 
   //generate computer move
