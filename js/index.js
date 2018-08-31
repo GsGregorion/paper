@@ -3,11 +3,11 @@
 	//przypisuje funkcje playerMoveAction do odpowiednich buttonów: papier, nożyce, kamień
 	var buttonsFinder = document.querySelectorAll('.player-move');
 	
-	for (var i = 0; i < buttonsFinder.length; i++) {
-		buttonsFinder[i].addEventListener('click', function(event) {
-      playerMoveAction(this.getAttribute('data-move'));
-    });
-  }
+	  for (var i = 0; i < buttonsFinder.length; i++) {
+		  buttonsFinder[i].addEventListener('click', function(event) {
+        playerMoveAction(this.getAttribute('data-move'));
+      });
+    }
   
 //show and hide Modal
   var handleShowModal = function(event) {
@@ -15,7 +15,7 @@
     var modalToOpen = (this.getAttribute('href')); //gpsE - getting href value from link
       document.querySelector('#modal-overlay').classList.add('show');
       document.querySelector(modalToOpen).classList.add('show'); //gpsE - query serach to add show class
-  };
+  }
 
   var handleHideModal = function(event) {
     event.preventDefault();
@@ -24,7 +24,7 @@
       modals[i].classList.remove('show'); //close all modals on overlay layer
     }
     document.querySelector('#modal-overlay').classList.remove('show'); // overlay close
-  };
+  }
 
 // modalLinks finder
   var modalLinks = document.querySelectorAll('.show-modal');
@@ -36,11 +36,11 @@
 //close function binding to close button
   var modals = document.querySelectorAll('.modal'); // gpse - variable to use in for loop to find all modals
 
-  for (var i = 0; i < modals.length; i++) {
-    modals[i].addEventListener('click', function(event) {
-      event.stopPropagation();
-    });
-  }
+    for (var i = 0; i < modals.length; i++) {
+      modals[i].addEventListener('click', function(event) {
+        event.stopPropagation();
+      });
+    }
 
 //close modal
   var closeButtons = document.querySelectorAll('.modal .close');
@@ -49,17 +49,12 @@
       closeButtons[i].addEventListener('click', handleHideModal);
     }
 
-  var displayFinalResultTable = function() {
-    document.querySelector("#modal-final-result").classList.remove('show');
-    tableResult = document.querySelector('#modal-table').classList.add('show');
-  }
-
-//close open modal
+//close to open modal
   var closeOpenButtons = document.querySelectorAll('.modal .close-open');
 
-  for (var i = 0; i < closeOpenButtons.length; i++) {
-    closeOpenButtons[i].addEventListener('click', displayFinalResultTable);
-  }
+    for (var i = 0; i < closeOpenButtons.length; i++) {
+      closeOpenButtons[i].addEventListener('click', displayFinalResultTable);
+    }
 
 // closing through the overlay clicking
   document.querySelector('#modal-overlay').addEventListener('click', handleHideModal);
@@ -67,20 +62,17 @@
 //game
 //global variables
   var params = {
-    winsNumber: 0, 
-    roundNumber: 0, 
-    playerScore: 0, 
-    computerScore: 0,
-    data: [],
-    canPlay: false,
-    progress: []
-  };
-
-  for (var i = 0; i < buttonsFinder.length; i++) {
-		buttonsFinder[i].disabled = true;
+      winsNumber: 0, 
+      roundNumber: 0, 
+      playerScore: 0, 
+      computerScore: 0,
+      data: [],
+      canPlay: false,
+      progress: []
   };
 
   //functions
+  //new game button function
   newGame.addEventListener('click', function(event) {
     var newWinNumber = window.prompt('Chcesz zagrać kolejny raz? Do ilu gramy?!');
     if (!newWinNumber || isNaN(newWinNumber)) {
@@ -101,24 +93,32 @@
     }
   });
 
-  var displayFinalGameResult = function(textToDisplay, roundResult) {
-    document.getElementById('finalResult').innerHTML = textToDisplay + '<br>' + roundResult;
-    document.querySelector('#modal-overlay').classList.add('show');
-    document.querySelector('#modal-final-result').classList.add('show');
-  //document.querySelector('#modal-table').classList.add('show');
-  }
-
+  //display round result
   var displayGameResult = function(textToDisplay, roundResult) {
     document.getElementById('gameSummary').innerHTML = textToDisplay;
     document.getElementById('gameResult').innerHTML = roundResult;
   }
 
+  //display final result 
+  var displayFinalGameResult = function(textToDisplay, roundResult) {
+    document.getElementById('finalResult').innerHTML = textToDisplay + '<br>' + roundResult;
+    document.querySelector('#modal-overlay').classList.add('show');
+    document.querySelector('#modal-final-result').classList.add('show');
+  }
+ 
+  var displayFinalResultTable = function() {
+    document.querySelector("#modal-final-result").classList.remove('show');
+    tableResult = document.querySelector('#modal-table').classList.add('show');
+  }
+
+  //generate computer move
   var getComputerMove = function() {
     var optionsArray = ['paper', 'scissors', 'stone'];
     var moveNumber = Math.floor(3 * Math.random());
       return optionsArray[moveNumber];
   }
-
+  
+  //create table result in modal
   function addTable() {
     var myTableResult = document.getElementById('tableResult');
       myTableResult.innerHTML = ('');
@@ -136,7 +136,8 @@
       }
     myTableResult.appendChild(table);
   }
-
+  
+  //disable player-move buttons
   function disableButtons() {
     for (var i = 0; i < buttonsFinder.length; i++) {
       buttonsFinder[i].disabled = true;
@@ -152,13 +153,14 @@
     }
   
   params.roundNumber++;
+
   var computerMove = getComputerMove(),
-    message,
-    message2,
-    whoWin,
-    semiResult;
+      message,
+      message2,
+      whoWin,
+      semiResult;
   
-  //sprawdzanie kto wygrał
+  //result check
   if (playerMove == computerMove) {
     whoWin = 'Draw';
     message = 'Remis! Wybrałeś ' + playerMove + '! Twój przeciwnik zagrał ' + computerMove + '! <br>';
@@ -190,11 +192,11 @@
     message2 = '<strong>Round</strong> no ' + params.roundNumber + '<br>' + '<strong>Player1 result <br></strong>' + params.playerScore + '<br>' + '<strong>Player2 result</strong> <br>' + params.computerScore + '<br> Gramy do ' + params.winsNumber;
     displayGameResult(message, message2);
   }
+
   semiResult = params.playerScore + ' - ' + params.computerScore;
   params.progress.push(params.roundNumber, playerMove, computerMove, whoWin, semiResult);
   
-  //display result  
-  //var tableResult = document.getElementById('tableResult').innerHTML = (params.progress);
+  //display result in modal 
   addTable();
   };
 })();
