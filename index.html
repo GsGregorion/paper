@@ -9,17 +9,17 @@
 
 <body>
   <div>
-    <button id="buttonPaper" data-move="paper" class="player-move">Papier</button>
+    <button id="buttonPaper" data-move="paper" class="player-move player-move-disabled">Papier</button>
  
-    <button id="buttonScissors" data-move="scissors" class="player-move">Nożyce</button>
+    <button id="buttonScissors" data-move="scissors" class="player-move player-move-disabled">Nożyce</button>
 
-    <button id="buttonStone" data-move="stone" class="player-move">Kamień</button>
+    <button id="buttonStone" data-move="stone" class="player-move player-move-disabled">Kamień</button>
   </div>
 
-  <div id="result"></div>
+  <div id="gameSummary"></div>
   
   <div>
-    <button id="newGame">New Game</button>
+    <button id="newGame" class="new-game">New Game</button>
   </div>
   
   <div id="gameResult"></div>
@@ -29,8 +29,8 @@
     <div class="modal" id="modal-final-result">
       <a href="#" class="close-open">x</a>
       <header>Game Result</header>
-      <div class="content" id="tableResult">
-        <p>Dolor sit amet!</p>
+      <div class="content" id="finalResult">
+        <p></p>
       </div>
     </div>
     <div class="modal" id="modal-table">
