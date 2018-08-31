@@ -175,14 +175,12 @@
   };
   
   if (params.playerScore == params.winsNumber) {
-    params.playerScore++;
     message2 = 'GAME OVER! YOU WON! Punkty które zdobyłeś:<br>' + params.playerScore;
     params.canPlay = false;
     disableButtons();
     displayGameResult(message, message2);
     displayFinalGameResult('', message2);
   } else if (params.computerScore == params.winsNumber) {
-    params.computerScore++;
     message2 = 'GAME OVER! Twój przeciwnik zwyciężył! Punkty które zdobył:<br> ' + params.computerScore;
     params.canPlay = false;
     disableButtons();
